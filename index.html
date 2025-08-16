@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation Smartphone & Réseaux - Mr Abel | Bénin</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 18px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+            margin: 10px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 107, 53, 0.4);
+            background: linear-gradient(45deg, #ff8555, #faa53e);
+        }
+
+        .cta-button i {
+            margin-right: 10px;
+            font-size: 1.3em;
+        }
+
+        /* Floating icons */
+        .floating-icon {
+            position: absolute;
+            color: rgba(255,255,255,0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-icon:nth-child(2) { top: 60%; right: 15%; animation-delay: 1s; }
+        .floating-icon:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 2s; }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 0;
+            background: #f8f9ff;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.2);
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2em;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        /* Modules Section */
+        .modules {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .module-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 60px rgba(102, 126, 234, 0.15);
+        }
+
+        .module-popular {
+            border: 3px solid #ff6b35;
+            transform: scale(1.05);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: #ff6b35;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .module-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .price-container {
+            margin: 20px 0;
+        }
+
+        .price-old {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 1.1em;
+        }
+
+        .price-new {
+            color: #27ae60;
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-left: 10px;
+        }
+
+        .module-features {
+            list-style: none;
+            margin: 25px 0;
+        }
+
+        .module-features li {
+            padding: 8px 0;
+            color: #666;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .module-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .module-cta {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .module-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8eeff 100%);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .testimonial-role {
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        /* How it works */
+        .how-it-works {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .step {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .step h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.3em;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer h3 {
+            margin-bottom: 20px;
+            color: #ff6b35;
+        }
+
+        .footer p, .footer a {
+            color: #ecf0f1;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+
+        .footer a:hover {
+            color: #ff6b35;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #34495e;
+            margin-top: 40px;
+            color: #95a5a6;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .fade-in {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .header p {
+                font-size: 1.1em;
+            }
+            
+            .section-title {
+                font-size: 2em;
+            }
+            
+            .module-card {
+                padding: 30px 20px;
+            }
+            
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <section class="header">
+        <div class="floating-icon"><i class="fas fa-mobile-alt fa-3x"></i></div>
+        <div class="floating-icon"><i class="fas fa-share-alt fa-2x"></i></div>
+        <div class="floating-icon"><i class="fas fa-coins fa-2x"></i></div>
+        
+        <div class="container">
+            <div class="header-content">
+                <h1>Formation Smartphone & Réseaux</h1>
+                <p>Maîtrisez les smartphones et les réseaux sociaux pour développer votre activité au Bénin avec Mr Abel</p>
+                <a href="https://wa.me/22941459490" class="cta-button">
+                    <i class="fab fa-whatsapp"></i>
+                    Commencer maintenant
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title">Pourquoi choisir cette formation ?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Maîtrise complète des smartphones</h3>
+                    <p>Apprenez à utiliser efficacement votre smartphone pour votre business et votre vie personnelle</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h3>Expertise réseaux sociaux</h3>
+                    <p>Développez votre présence en ligne et attirez plus de clients grâce aux réseaux sociaux</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3>Génération de revenus</h3>
+                    <p>Transformez vos compétences digitales en opportunités financières concrètes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules -->
+    <section class="modules">
+        <div class="container">
+            <h2 class="section-title">Choisissez votre formation</h2>
+            <div class="modules-grid">
+                <div class="module-card">
+                    <h3 class="module-title">Découverte</h3>
+                    <div class="price-container">
+                        <span class="price-old">2 500 FCFA</span>
+                        <span class="price-new">1 000 FCFA</span>
+                    </div>
+                    <ul class="module-features">
+                        <li>Fiche pratique n°1</li>
+                        <li>Mini-mission guidée</li>
+                        <li>Accès immédiat</li>
+                        <li>Support de base</li>
+                    </ul>
+                    <a href="https://wa.me/22941459490?text=Je%20veux%20la%20formation%20Découverte" class="module-cta">Choisir Découverte</a>
+                </div>
+
+                <div class="module-card module-popular">
+                    <div class="popular-badge">Plus populaire</div>
+                    <h3 class="module-title">Standard</h3>
+                    <div class="price-container">
+                        <span class="price-old">10 000 FCFA</span>
+                        <span class="price-new">5 000 FCFA</span>
+                    </div>
+                    <ul class="module-features">
+                        <li>Fiches pratiques 1 à 3</li>
+                        <li>Micro-missions personnalisées</li>
+                        <li>Check-in régulier</li>
+                        <li>Groupe WhatsApp privé</li>
+                        <li>Support prioritaire</li>
+                    </ul>
+                    <a href="https://wa.me/22941459490?text=Je%20veux%20la%20formation%20Standard" class="module-cta">Choisir Standard</a>
+                </div>
+
+                <div class="module-card">
+                    <h3 class="module-title">Pro</h3>
+                    <div class="price-container">
+                        <span class="price-old">25 000 FCFA</span>
+                        <span class="price-new">10 000 FCFA</span>
+                    </div>
+                    <ul class="module-features">
+                        <li>Fiches pratiques complètes (1 à 5)</li>
+                        <li>FAQ exhaustive</li>
+                        <li>Checklist globale</li>
+                        <li>Coaching personnalisé</li>
+                        <li>Audit complet de vos réseaux</li>
+                        <li>Support VIP</li>
+                    </ul>
+                    <a href="https://wa.me/22941459490?text=Je%20veux%20la%20formation%20Pro" class="module-cta">Choisir Pro</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Ce que disent nos apprenants</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Grâce à cette formation, j'ai doublé mes ventes en ligne. Mr Abel explique tout de manière très claire et pratique."</p>
+                    <div class="testimonial-author">Marie Akouété</div>
+                    <div class="testimonial-role">Commerçante - Cotonou</div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Une formation exceptionnelle ! J'ai enfin compris comment utiliser les réseaux sociaux pour mon business. Très recommandée."</p>
+                    <div class="testimonial-author">Jean Koussi</div>
+                    <div class="testimonial-role">Entrepreneur - Porto-Novo</div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Le module Pro m'a permis d'optimiser complètement ma présence digitale. L'investissement est rapidement rentabilisé."</p>
+                    <div class="testimonial-author">Fatima Bah</div>
+                    <div class="testimonial-role">Consultante - Parakou</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Comment ça marche ?</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Choisissez votre module</h3>
+                    <p>Sélectionnez la formation qui correspond à vos besoins et votre budget</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Contactez-nous</h3>
+                    <p>Cliquez sur WhatsApp pour finaliser votre inscription rapidement</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Accédez au contenu</h3>
+                    <p>Recevez immédiatement vos ressources et commencez votre apprentissage</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Appliquez et réussissez</h3>
+                    <p>Mettez en pratique avec notre accompagnement personnalisé</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>Contact</h3>
+                    <p><i class="fab fa-whatsapp"></i> +229 41 45 94 90</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Bénin</p>
+                    <p><i class="fas fa-envelope"></i> karl2tron@gmail.com</p>
+                </div>
+                <div>
+                    <h3>Formations</h3>
+                    <a href="https://wa.me/22941459490?text=Je%20veux%20la%20formation%20Découverte">Module Découverte</a><br>
+                    <a href="https://wa.me/22941459490?text=Je%20veux%20la%20formation%20Standard">Module Standard</a><br>
+                    <a href="https://wa.me/22941459490?text=Je%20veux%20la%20formation%20Pro">Module Pro</a><br>
+                    <a href="https://wa.me/22941459490?text=Bonjour,%20j'ai%20besoin%20d'aide">Support</a>
+                </div>
+                <div>
+                    <h3>Informations</h3>
+                    <a href="#">Conditions d'utilisation</a><br>
+                    <a href="#">Politique de confidentialité</a><br>
+                    <a href="#">Garantie</a><br>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Formation Smartphone & Réseaux par Mr Abel. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.benefit-card, .module-card, .testimonial-card, .step');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('fade-in');
+                }
+            });
+        }
+
+        // Initialize animations
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
